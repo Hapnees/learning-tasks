@@ -1,0 +1,50 @@
+<html>
+	<body>
+		<script>
+			const data = {
+				Рыбы: {
+					форель: {},
+					лосось: {},
+				},
+
+				Деревья: {
+					Огромные: {
+						секвойя: {},
+						дуб: {},
+					},
+
+					Цветковые: {
+						яблоня: {},
+						магнолия: {},
+					},
+				},
+			}
+
+			const body = document.body
+
+			const createTree = (container, data) => {
+				container.append(createList(data))
+			}
+
+			const createList = data => {
+				if (!Object.keys(data).length) return
+
+				const newUl = document.createElement('ul')
+
+				for (key in data) {
+					const newLi = document.createElement('li')
+					newLi.textContent = key
+
+					const childrenUl = createList(data[key])
+					if (childrenUl) newLi.append(childrenUl)
+
+					newUl.append(newLi)
+				}
+
+				return newUl
+			}
+
+			createTree(body, data)
+		</script>
+	</body>
+</html>

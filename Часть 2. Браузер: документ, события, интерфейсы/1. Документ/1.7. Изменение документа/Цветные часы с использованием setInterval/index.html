@@ -1,0 +1,63 @@
+<html>
+	<body>
+		<div>
+			<p>
+				<span class="hours">hh</span>:<spap class="minutes">mm</spap>:<span
+					class="seconds"
+					>ss</span
+				>
+			</p>
+			<button onclick="updateTime()">Start</button>
+			<button onclick="stopTime()">Stop</button>
+		</div>
+		<style>
+			.hours {
+				color: red;
+			}
+
+			.minutes {
+				color: green;
+			}
+
+			.seconds {
+				color: blue;
+			}
+		</style>
+		<script>
+			let interval
+
+			const getTime = () => {
+				let hoursElement = document.querySelector('.hours')
+				let minutesElement = document.querySelector('.minutes')
+				let secondsElement = document.querySelector('.seconds')
+
+				const date = new Date()
+				const hours = date.getHours()
+				const minutes = date.getMinutes()
+				const seconds = date.getSeconds()
+
+				if (hours < 10) {
+					hours = '0' + hours
+				}
+
+				if (minutes < 10) {
+					minutes = '0' + minutes
+				}
+
+				if (seconds < 10) {
+					seconds = '0' + seconds
+				}
+
+				hoursElement.textContent = hours
+				minutesElement.textContent = minutes
+				secondsElement.textContent = seconds
+			}
+
+			const updateTime = () => {
+				interval = setInterval(getTime, 1000)
+			}
+
+			const stopTime = () => clearInterval(interval)
+		</script>
+	</body>
+</html>

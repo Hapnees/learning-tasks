@@ -1,0 +1,57 @@
+<html>
+	<body>
+		<button
+			onclick="showNotification({top: 10, right: 10, html: 'Hello!', className: 'welcome'})"
+		>
+			Show notification
+		</button>
+		<style>
+			.notification {
+				position: absolute;
+				min-width: 200px;
+				min-height: 50px;
+				border-radius: 6px;
+				border: 1px solid rgba(30, 202, 30, 0.77);
+				background-color: rgba(65, 255, 65, 0.282);
+				color: rgb(29, 127, 29);
+				text-align: center;
+
+				animation: show 0.4s;
+			}
+
+			@keyframes show {
+				from {
+					transform: scale(0);
+				}
+				to {
+					transform: scale(1);
+				}
+			}
+		</style>
+		<script>
+			function showNotification(params) {
+				if (this.isRunning) return
+
+				this.isRunning = true
+				const notifWindow = document.createElement('div')
+
+				notifWindow.className = 'notification'
+				notifWindow.style.top = params.top + 'px'
+				notifWindow.style.right = params.right + 'px'
+				notifWindow.classList.add(params.className)
+
+				const notifTextElement = document.createElement('p')
+				notifTextElement.textContent = params.html
+
+				notifWindow.append(notifTextElement)
+
+				document.body.append(notifWindow)
+
+				setTimeout(() => {
+					notifWindow.remove()
+					this.isRunning = false
+				}, 1500)
+			}
+		</script>
+	</body>
+</html>

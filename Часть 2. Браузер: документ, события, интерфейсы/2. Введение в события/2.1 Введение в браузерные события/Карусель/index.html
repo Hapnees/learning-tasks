@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="container__menu">
+			<button class="arrow">⇦</button>
+			<div class="menu">
+				<!--BOARD-->
+				<ul>
+					<li><img src="https://ru.js.cx/carousel/1.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/2.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/3.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/4.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/5.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/6.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/7.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/8.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/9.png" /></li>
+					<li><img src="https://ru.js.cx/carousel/10.png" /></li>
+				</ul>
+			</div>
+			<button class="arrow">⇨</button>
+		</div>
+
+		<script>
+			const menu = document.getElementsByTagName('ul')[0]
+			const [arrowLeft, arrowRight] = document.querySelectorAll('.arrow')
+
+			const widthImg =
+				menu.children[0].getElementsByTagName('img')[0].clientWidth
+
+			const defaultNumImgsOnBoard = 3
+
+			const maxNumSwipes = Math.ceil(menu.children.length / 3)
+			const numImgs = menu.children.length
+
+			const getSwipeBoard = () => {
+				let numCurrentSwipe = 0
+
+				return direction => {
+					switch (direction) {
+						case 'right':
+							if (numCurrentSwipe === maxNumSwipes - 1) break
+							numCurrentSwipe++
+							break
+						case 'left':
+							if (numCurrentSwipe === 0) break
+							numCurrentSwipe--
+							break
+					}
+
+					const diff = numImgs - numCurrentSwipe * defaultNumImgsOnBoard
+					const checkDiff = diff < defaultNumImgsOnBoard
+
+					const addWidth = checkDiff ? diff * widthImg : 0
+					const modifNumCurrentSwipe = checkDiff
+						? numCurrentSwipe - 1
+						: numCurrentSwipe
+
+					menu.style.transform = `translateX(-${
+						defaultNumImgsOnBoard * widthImg * modifNumCurrentSwipe + addWidth
+					}px)`
+				}
+			}
+
+			const swipeBoard = getSwipeBoard()
+
+			arrowRight.onclick = () => swipeBoard('right')
+			arrowLeft.onclick = () => swipeBoard('left')
+		</script>
+	</body>
+</html>

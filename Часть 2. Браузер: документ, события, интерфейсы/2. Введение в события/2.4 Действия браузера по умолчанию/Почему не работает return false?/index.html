@@ -1,0 +1,12 @@
+<html>
+	<body>
+		<a href="https://w3.org" onclick="handler(event)">браузер откроет w3.org</a>
+		<script>
+			//Исправленный вариант
+			function handler(event) {
+				event.preventDefault()
+				alert('...')
+			}
+		</script>
+	</body>
+</html>

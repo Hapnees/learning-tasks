@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.close {
+				display: none !important;
+			}
+
+			.arrow-right,
+			.arrow-down {
+				color: green;
+			}
+
+			.dropdown {
+				margin-top: 80px;
+				margin-left: 120px;
+			}
+
+			.dropdown__title {
+				cursor: pointer;
+			}
+
+			.dropdown__menu {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="dropdown">
+			<p class="dropdown__title">
+				<span class="arrow-right">▶</span>
+				<span class="arrow-down close">▼</span> Сладости (нажми меня)!
+			</p>
+			<ul class="dropdown__menu close">
+				<li>Пирожное</li>
+				<li>Пончик</li>
+				<li>Мёд</li>
+			</ul>
+		</div>
+
+		<script>
+			const title = document.querySelector('.dropdown')
+			const menu = document.querySelector('.dropdown__menu')
+
+			const arrowRight = document.querySelector('.arrow-right')
+			const arrowDown = document.querySelector('.arrow-down')
+
+			title.onclick = () => {
+				menu.classList.toggle('close')
+				arrowRight.classList.toggle('close')
+				arrowDown.classList.toggle('close')
+			}
+		</script>
+	</body>
+</html>

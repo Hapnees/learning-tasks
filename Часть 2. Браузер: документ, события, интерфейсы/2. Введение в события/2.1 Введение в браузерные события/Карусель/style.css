@@ -1,0 +1,69 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container__menu {
+	display: inline-flex;
+	padding: 0 10px;
+	align-items: center;
+	background: #eee;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+
+	margin-left: 40px;
+	margin-top: 40px;
+}
+
+.menu {
+	display: flex;
+	justify-content: center;
+
+	overflow: hidden;
+	width: 390px;
+}
+
+.arrow {
+	padding: 0;
+	background: #ddd;
+	border-radius: 15px;
+	border: 1px solid gray;
+	font-size: 24px;
+	line-height: 24px;
+	color: #444;
+	display: block;
+}
+
+.arrow:focus {
+	outline: none;
+}
+
+.arrow:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+
+ul {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0;
+
+	width: 390px;
+	height: 130px;
+	margin: 0 30px;
+
+	transition: transform 0.3s;
+}
+
+ul img {
+	width: 130px;
+	height: 130px;
+	display: block; /* убираем пустое место вокруг картинок */
+}
+
+ul li {
+	display: inline-block; /* убираем пустое место между элементами списка */
+}

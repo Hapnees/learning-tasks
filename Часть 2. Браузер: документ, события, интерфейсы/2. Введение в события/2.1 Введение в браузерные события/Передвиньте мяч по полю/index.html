@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			#field {
+				position: relative;
+				width: 200px;
+				height: 150px;
+				border: 10px solid black;
+				background-color: #00ff00;
+				overflow: hidden;
+				cursor: pointer;
+			}
+
+			#ball {
+				position: absolute;
+				display: block;
+				transition: left 0.5s, top 0.5s;
+			}
+		</style>
+	</head>
+
+	<body style="height: 2000px">
+		Нажмите на поле для перемещения мяча.
+		<br />
+		Мяч не должен выходить за границы поля.
+
+		<div id="field">
+			<img src="https://ru.js.cx/clipart/ball.svg" id="ball" /> . . . . . . . .
+			. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+			. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+			. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+			. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+			. . . . . . . . . . . . . . . . . . . . .
+		</div>
+		<script>
+			const ball = document.getElementById('ball')
+			const field = document.getElementById('field')
+
+			field.onclick = function (event) {
+				const fieldCoords = this.getBoundingClientRect()
+
+				const mouseCoords = { x: event.clientX, y: event.clientY }
+				const ballCoords = {
+					x:
+						mouseCoords.x -
+						fieldCoords.left -
+						field.clientLeft -
+						ball.clientWidth / 2,
+
+					y:
+						mouseCoords.y -
+						fieldCoords.top -
+						field.clientTop -
+						ball.offsetHeight / 2,
+				}
+
+				const diffXRight = field.clientWidth - (ballCoords.x + ball.clientWidth)
+				const diffXLeft =
+					field.offsetWidth -
+					field.clientWidth -
+					(ballCoords.x + ball.clientWidth / 2)
+				const diffYBottom =
+					field.clientHeight - (ballCoords.y + ball.clientWidth)
+
+				if (diffXRight < 0) {
+					ballCoords.x += diffXRight
+				}
+
+				if (diffXLeft > 0) {
+					ballCoords.x += diffXLeft
+				}
+
+				if (ballCoords.y < 0) {
+					ballCoords.y = 0
+				}
+
+				if (diffYBottom < 0) {
+					ballCoords.y += diffYBottom
+				}
+
+				ball.style.left = ballCoords.x + 'px'
+
+				ball.style.top = ballCoords.y + 'px'
+			}
+		</script>
+	</body>
+</html>

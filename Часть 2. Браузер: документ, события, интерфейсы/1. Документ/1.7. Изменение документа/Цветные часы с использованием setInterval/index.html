@@ -1,15 +1,5 @@
 <html>
-	<body>
-		<div>
-			<p>
-				<span class="hours">hh</span>:<spap class="minutes">mm</spap>:<span
-					class="seconds"
-					>ss</span
-				>
-			</p>
-			<button onclick="updateTime()">Start</button>
-			<button onclick="stopTime()">Stop</button>
-		</div>
+	<head>
 		<style>
 			.hours {
 				color: red;
@@ -23,6 +13,19 @@
 				color: blue;
 			}
 		</style>
+	</head>
+	<body>
+		<div>
+			<p>
+				<span class="hours">hh</span>:<spap class="minutes">mm</spap>:<span
+					class="seconds"
+					>ss</span
+				>
+			</p>
+			<button onclick="updateTime()">Start</button>
+			<button onclick="stopTime()">Stop</button>
+		</div>
+
 		<script>
 			let interval
 

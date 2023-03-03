@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<script>
+			const runOnKeys = (func, ...args) => {
+				let pressedKeyCodes = []
+				const interval = 20
+
+				document.addEventListener('keydown', event => {
+					pressedKeyCodes.push(event.code)
+					if (
+						JSON.stringify(args.sort()) ===
+						JSON.stringify(pressedKeyCodes.sort())
+					) {
+						func()
+					}
+
+					const timer = setTimeout(() => {
+						pressedKeyCodes = []
+						clearInterval(timer)
+					}, interval)
+				})
+			}
+
+			runOnKeys(() => console.log('Привет!'), 'KeyQ', 'KeyW')
+		</script>
+	</body>
+</html>

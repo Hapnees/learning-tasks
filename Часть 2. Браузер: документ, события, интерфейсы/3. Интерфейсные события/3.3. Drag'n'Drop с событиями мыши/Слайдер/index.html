@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div id="slider" class="slider">
+			<div class="thumb"></div>
+		</div>
+
+		<script>
+			const slider = document.getElementById('slider')
+			const sliderRect = slider.getBoundingClientRect()
+			const thumb = document.querySelector('.thumb')
+
+			const rightLimit = sliderRect.right - thumb.offsetWidth
+
+			thumb.style.top =
+				sliderRect.y - (thumb.offsetHeight - slider.offsetHeight) / 2 + 'px'
+			thumb.style.left = sliderRect.x + 15 + 'px'
+
+			thumb.style.position = 'absolute'
+			thumb.style.zIndex = '1000'
+
+			thumb.ondragstart = () => false
+
+			thumb.onmousedown = event => {
+				const thumbRect = thumb.getBoundingClientRect()
+				const shiftX = event.clientX - thumbRect.left
+				const shiftY = event.clientY - thumbRect.top
+
+				const onMouseMove = event => {
+					let leftValue = event.clientX - shiftX
+					if (leftValue < sliderRect.left) leftValue = sliderRect.left
+
+					if (leftValue > rightLimit) leftValue = rightLimit
+
+					thumb.style.left = leftValue + 'px'
+				}
+
+				const onMouseUp = () => {
+					document.removeEventListener('mousemove', onMouseMove)
+					document.removeEventListener('mouseup', onMouseUp)
+				}
+
+				document.addEventListener('mousemove', onMouseMove)
+				document.addEventListener('mouseup', onMouseUp)
+			}
+
+			slider.onclick = event => {
+				const target = event.target
+				if (target === thumb) return
+				let leftValue = event.clientX - thumb.offsetWidth / 2
+
+				if (leftValue > rightLimit) leftValue = rightLimit
+				if (leftValue < sliderRect.x) leftValue = sliderRect.x
+
+				thumb.style.left = leftValue + 'px'
+			}
+		</script>
+	</body>
+</html>

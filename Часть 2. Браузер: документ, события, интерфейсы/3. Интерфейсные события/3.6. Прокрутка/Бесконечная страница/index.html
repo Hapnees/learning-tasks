@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<script>
+			const body = document.body
+			body.style.minHeight = '1000px'
+			window.addEventListener('scroll', () => {
+				while (true) {
+					const html = document.documentElement
+					const htmlRect = html.getBoundingClientRect()
+					if (htmlRect.bottom > html.clientHeight + 100) break
+
+					const dateElem = document.createElement('p')
+					dateElem.textContent = new Date()
+					body.append(dateElem)
+				}
+			})
+		</script>
+	</body>
+</html>

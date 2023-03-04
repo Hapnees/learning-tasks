@@ -1,0 +1,24 @@
+.container__edit {
+	position: relative;
+}
+
+.edit__container__btn {
+	position: absolute;
+	bottom: -20px;
+}
+
+.edit__container__btn > button {
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.edit {
+	font-size: 9px;
+	resize: none;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	border: none;
+	outline: none;
+	background-color: #eaeaea;
+}

@@ -77,16 +77,13 @@
 
 		<script>
 			const house = document.getElementById('house')
-
 			let tooltip
+
 			house.addEventListener('mouseover', event => {
 				const roof = document.getElementById('roof')
 				const target = event.target
 				const tooltipText =
 					target.dataset.tooltip || target.closest('#house').dataset.tooltip
-
-				const houseCoords = house.getBoundingClientRect()
-				const targetCoords = target.getBoundingClientRect()
 
 				if (!tooltipText) return
 
@@ -94,6 +91,13 @@
 				tooltip.className = 'tooltip'
 				tooltip.textContent = tooltipText
 				target.after(tooltip)
+
+				coordsAdjustment(target, house, tooltip, roof)
+			})
+
+			const coordsAdjustment = (target, house, tooltip, roof) => {
+				const houseCoords = house.getBoundingClientRect()
+				const targetCoords = target.getBoundingClientRect()
 
 				tooltipCoords = {
 					x: houseCoords.x + (house.offsetWidth - tooltip.offsetWidth) / 2,
@@ -115,7 +119,7 @@
 
 				tooltip.style.left = tooltipCoords.x + 'px'
 				tooltip.style.top = tooltipCoords.y + 'px'
-			})
+			}
 
 			house.addEventListener('mouseout', event => {
 				if (tooltip) {

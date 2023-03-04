@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="my.css" />
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<ul>
+			<li>Кликните на div ниже, чтобы отредактировать текст.</li>
+			<li>Нажатие на Enter или потеря фокуса с ввода сохранят содержимое.</li>
+		</ul>
+
+		<div id="view" class="view">Текст</div>
+
+		<script>
+			const contViewElem = document.getElementById('container__view')
+			const viewElem = document.getElementById('view')
+
+			viewElem.onclick = () => {
+				const textareaElem = document.createElement('textarea')
+				textareaElem.className = 'edit'
+
+				textareaElem.addEventListener('blur', setViewText)
+
+				textareaElem.onkeydown = function () {
+					if (event.key === 'Enter') {
+						textareaElem.removeEventListener('blur', setViewText)
+						setViewText.call(this)
+					}
+				}
+
+				textareaElem.value = viewElem.textContent
+				viewElem.replaceWith(textareaElem)
+				textareaElem.focus()
+			}
+
+			function setViewText() {
+				viewElem.textContent = this.value
+				this.replaceWith(viewElem)
+			}
+		</script>
+	</body>
+</html>
